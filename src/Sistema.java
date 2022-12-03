@@ -10,6 +10,10 @@ public class Sistema {
     static Scanner scan = new Scanner(System.in);
 
     public static void main(String[] args) {
+        Animal a = new Animal("1","O","H",false,false,null, null, "0");
+        ABB armar = new ABB();
+        armar.armarArbol(a);
+        armar.toString();
         Usuario logueado = new Usuario();
         int opcion = 1;
         while (opcion != 0) {
@@ -176,7 +180,7 @@ public class Sistema {
                     desparasitarAnimal();
                     break;
                 case 3:
-
+                    vacunarAnimal();
                     break;
                 case 4:
 

@@ -83,4 +83,6 @@ public class Animal {
         this.idPadre = idPadre;
         this.empresa = empresa;
     }
+
+    public Animal(){}
 }
