@@ -8,53 +8,40 @@ public class Sistema {
     static List<Usuario> listaUsuario = new ArrayList<>();
     static List<Empresa> listaEmpresa = new ArrayList<>();
     static List<ABB> listaABB = new ArrayList<>();
-
-    static String idEmpresa;
     static Scanner scan = new Scanner(System.in);
 
     public static void main(String[] args) {
 
-        Usuario c = new Usuario("1", "1");
-        Empresa e1 = new Empresa("1", "Joselitos", "0", "xd");
-        Empresa e2 = new Empresa("2", "Bruno", "0", "xd2");
-        Animal a1 = new Animal("1", "Ovino", "Hembra", false, false, "1");
-        Animal a2 = new Animal("2", "Ovino", "Hembra", false, false, "1");
-        Animal a3 = new Animal("3", "Ovino", "Macho", false, false, "1");
+        Usuario usuario = new Usuario("admin", "admin");
+        listaUsuario.add(usuario);
 
-        Animal a4 = new Animal("4", "Ovino", "Macho", false, false, "1");
-        Animal a5 = new Animal("5", "Ovino", "Hembra", false, false, "1");
-        Animal a6 = new Animal("6", "Ovino", "Macho", false, false, "1");
+        Empresa empresa = new Empresa("543765", "Conaprole", "+59894342723", "Montevideo");
+        listaEmpresa.add(empresa);
 
-        Animal a7 = new Animal("7", "Ovino", "Macho", false, false, "1");
+        Animal animal1 = new Animal("648532", "Ovino", "Hembra", true, false, "543765");
+        listaAnimal.add(animal1);
+        Animal animal2 = new Animal("465243", "Ovino", "Macho", false, false, "543765");
+        listaAnimal.add(animal2);
+        Animal animal3 = new Animal("687347", "Ovino", "Hembra", true, true, "543765");
+        listaAnimal.add(animal3);
+        Animal animal4 = new Animal("687235", "Ovino", "Hembra", false, true, "543765");
+        listaAnimal.add(animal4);
+        Animal animal5 = new Animal("780123", "Ovino", "Macho", true, false, "543765");
+        listaAnimal.add(animal5);
+        Animal animal6 = new Animal("345233", "Ovino", "Macho", true, false, "543765");
+        listaAnimal.add(animal6);
+        Animal animal7 = new Animal("879234", "Ovino", "Hembra", false, false, "543765");
+        listaAnimal.add(animal7);
 
-        Animal a8 = new Animal("8", "Ovino", "Macho", false, false, "2");
-
-
-
-        listaAnimal.add(a1);
-        listaAnimal.add(a2);
-        listaAnimal.add(a3);
-        listaAnimal.add(a4);
-        listaAnimal.add(a5);
-        listaAnimal.add(a6);
-        listaAnimal.add(a7);
-        listaAnimal.add(a8);
-
-
-
-        listaUsuario.add(c);
-        listaEmpresa.add(e1);
-        listaEmpresa.add(e2);
-
-        ABB armar1 = new ABB();
-        armar1.armarArbol(a1, a2, a3);
-        listaABB.add(armar1);
-        ABB armar2 = new ABB();
-        armar2.armarArbol(a4, a5, a6);
-        listaABB.add(armar2);
-        ABB armar3 = new ABB();
-        armar3.armarArbol(a7, a1, a4);
-        listaABB.add(armar3);
+        ABB madre = new ABB();
+        madre.armarArbol(animal3, animal1, animal2);
+        listaABB.add(madre);
+        ABB padre = new ABB();
+        padre.armarArbol(animal6, animal4, animal5);
+        listaABB.add(padre);
+        ABB animal = new ABB();
+        animal.armarArbol(animal7, animal3, animal6);
+        listaABB.add(animal);
 
         Usuario logueado = new Usuario();
         int opcion = 1;
@@ -189,9 +176,6 @@ public class Sistema {
         }
     }
 
-
-
-
     public static void bajaEmpresa() {
         int cont = 1;
         for (Empresa unaEmpresa : listaEmpresa) {
@@ -296,19 +280,18 @@ public class Sistema {
         List<Animal> listaMadre = new ArrayList<>();
         for (Animal unAnimal : listaAnimal) {
             if (unAnimal.getSexo().equals("Hembra") && unAnimal.getTipo().equals(tipo) &&
-            unAnimal.getEmpresa().equals(idEmpresa)) {
+                    unAnimal.getEmpresa().equals(idEmpresa)) {
                 System.out.println(cont + ". " + unAnimal);
                 listaMadre.add(unAnimal);
                 cont++;
             }
         }
-
-        System.out.println("Ingrese el numero del madre del animal, 0 si es desconocido.");
         boolean tf = false;
-        int num = scan.nextInt();
-
+        int num = 0;
         Animal animalMadre = new Animal();
         while (!tf) {
+            System.out.println("Ingrese el numero de la madre del animal, 0 si es desconocido.");
+            num = scan.nextInt();
             if (num == 0) {
                 System.out.println("Madre del animal seleccionada como nula.");
                 tf = true;
@@ -317,7 +300,8 @@ public class Sistema {
                 animalMadre = listaMadre.get(num - 1);
                 System.out.println("Madre del animal seleccionada.");
                 tf = true;
-            } else {
+            }
+            if (num < 0 || num > listaMadre.size()) {
                 System.out.println("Ese numero de animal no existe, intente de nuevo.");
             }
         }
@@ -332,11 +316,10 @@ public class Sistema {
                 cont++;
             }
         }
-        System.out.println("Ingrese el numero del padre del animal, 0 si es desconocido.");
         tf = false;
-        num = scan.nextInt();
-        String idPadre = "";
         while (!tf) {
+            System.out.println("Ingrese el numero del padre del animal, 0 si es desconocido.");
+            num = scan.nextInt();
             if (num == 0) {
                 System.out.println("Padre del animal seleccionado como nula.");
                 tf = true;
@@ -345,7 +328,8 @@ public class Sistema {
                 animalPadre = listaPadre.get(num - 1);
                 System.out.println("Padre del animal seleccionado.");
                 tf = true;
-            } else {
+            }
+            if (num < 0 || num > listaPadre.size()) {
                 System.out.println("Ese numero de animal no existe, intente de nuevo.");
             }
         }
@@ -409,7 +393,7 @@ public class Sistema {
             } else {
                 cont = 1;
                 for (Animal unAnimal : listaAnimal) {
-                    if (!unAnimal.isVacunado()) {
+                    if (!unAnimal.isVacunado() && unAnimal.getEmpresa().equals(idEmpresa)) {
                         if (cont == numA) {
                             unAnimal.setVacunado(true);
                             System.out.println("El animal fue vacunado correctamente.");
@@ -422,79 +406,66 @@ public class Sistema {
     }
 
     public static void listarPorEspecie(String idEmpresa) {
-        System.out.println("Seleccione la epecie a listar");
+        System.out.println("Seleccione la especie a listar, ovino o bobino");
         String tipo = scan.next().toLowerCase().charAt(0) == 'o' ? "Ovino" : "Bovino";
 
         int cont = 1;
         for (Animal unAnimal : listaAnimal) {
             if (unAnimal.getTipo().equals(tipo) && unAnimal.getEmpresa().equals(idEmpresa)) {
-                System.out.println(cont + " " + unAnimal);
+                System.out.println(unAnimal);
+                cont++;
             }
+        }if(cont == 1){
+            System.out.println("No existe nungun animal de este tipo.");
         }
     }
 
-
     public static void listarPorFamiliaPorId(String idEmpresa) {
-
-
-        for (Animal unAnimal : listaAnimal) {
-if(unAnimal.getEmpresa().equals(idEmpresa)) {
-
-    System.out.println(unAnimal);
-}
+        for(Animal unAnimal : listaAnimal){
+            System.out.println(unAnimal.getId()+"\n");
         }
-        System.out.println("Seleccione el id del animal que quiere listar la familia.");
-        String id = scan.next();
-
-        //  Animal Sanimal =new Animal();
-
-
-            for (Animal unAnimal : listaAnimal) {
-                if (unAnimal.getId().equals(id) && unAnimal.getEmpresa().equals(idEmpresa)) {
-
-                    System.out.println("Animal selecionado con exito");
-
-
-                    for (ABB arbol : listaABB) {
-                        if (arbol.raiz.GetIdAnimal().equals(unAnimal.getId())) {
-
-                            arbol.imprimirPre();
-
-
-                        }
-                    }
-                }
-
-
-            }
-        }
-    public static void listarAPPorId(String idEmpresa) {
-        System.out.println("Seleccione el id del animal que quiere listar.");
+        System.out.println("Seleccione el id del animal que quiere listar su familia.");
         String id = scan.next();
         for (Animal unAnimal : listaAnimal) {
             if (unAnimal.getId().equals(id) && unAnimal.getEmpresa().equals(idEmpresa)) {
-                System.out.println(unAnimal.toString());
-            }
-        }
-        for (Animal unAnimal : listaAnimal) {
-            if (!unAnimal.getId().equals(id) && unAnimal.getEmpresa().equals(idEmpresa)) {
-                System.out.println("No existe ese ID");
+                for (ABB arbol : listaABB) {
+                    if (arbol.raiz.GetIdAnimal().equals(unAnimal.getId())) {
+                        arbol.imprimir();
+                    }
+                }
             }
         }
     }
 
-
-        public  ABB.Nodo buscarfamiliar(String id) {
-
-                for (ABB arbol : listaABB) {
-                    if (arbol.raiz.GetIdAnimal().equals(id)) {
-                            return arbol.raiz;
-                    }
-                }
-
-
-            return null;
+    public static void listarAPPorId(String idEmpresa) {
+        for(Animal unAnimal : listaAnimal){
+            if(unAnimal.getEmpresa().equals(idEmpresa)){
+                System.out.println(unAnimal.getId()+"\n");
+            }
         }
+        System.out.println("Seleccione el id del animal que quiere listar.");
+        String id = scan.next();
+        int cont = 0;
+        for (Animal unAnimal : listaAnimal) {
+            if (unAnimal.getId().equals(id) && unAnimal.getEmpresa().equals(idEmpresa)) {
+                System.out.println(unAnimal.toString());
+                cont++;
+            }
+        }
+        if(cont == 0){
+            System.out.println("No existe un animal con ese Id.");
+        }
+    }
+
+    public ABB.Nodo buscarfamiliar(String id) {
+
+        for (ABB arbol : listaABB) {
+            if (arbol.raiz.GetIdAnimal().equals(id)) {
+                return arbol.raiz;
+            }
+        }
+        return null;
+    }
 
 }
 

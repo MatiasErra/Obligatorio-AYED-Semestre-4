@@ -1,7 +1,7 @@
 public class ABB {
     static class Nodo {
 
-         String IdAnimal;
+        String IdAnimal;
         Nodo madre, padre;
 
         public String GetIdAnimal() {
@@ -17,40 +17,26 @@ public class ABB {
         }
     }
 
-
     Nodo raiz;
 
-
-
-
-
-
-    public void imprimirPre(){
-
+    public void imprimir() {
         System.out.println(toString(this.raiz));
     }
 
-
-
-
-
-    public ABB armarArbol(Animal pAnimal, Animal Madre, Animal Padre  ){
+    public ABB armarArbol(Animal pAnimal, Animal Madre, Animal Padre) {
         Sistema unSistema = new Sistema();
         String pMadreAnimal = "";
-    if(Madre!= null) {
-   pMadreAnimal = unSistema.buscarAnimal(Madre.getId(), 0);
-    }
-    else{
-    pMadreAnimal = null;
-    }
+        if (Madre != null) {
+            pMadreAnimal = unSistema.buscarAnimal(Madre.getId(), 0);
+        } else {
+            pMadreAnimal = null;
+        }
         String pPadreAnimal = "";
-    if(Padre!=null) {
-        pPadreAnimal = unSistema.buscarAnimal(Padre.getId(), 0);
-    }
-    else
-    {
-        pPadreAnimal = null;
-    }
+        if (Padre != null) {
+            pPadreAnimal = unSistema.buscarAnimal(Padre.getId(), 0);
+        } else {
+            pPadreAnimal = null;
+        }
         String pAbuelaMaterna = "";
         String pAbueloMaterno = "";
         String pAbuelaPaterna = "";
@@ -58,34 +44,30 @@ public class ABB {
         ABB unArbolAnimal = new ABB();
 
         Nodo animal = new Nodo();
-        animal.IdAnimal  = pAnimal.getId();
+        animal.IdAnimal = pAnimal.getId();
 
         Nodo madre = new Nodo();
-        madre.IdAnimal = pMadreAnimal;
         Nodo padre = new Nodo();
+        madre.IdAnimal = pMadreAnimal;
         padre.IdAnimal = pPadreAnimal;
         animal.madre = madre;
         animal.padre = padre;
 
 
-        if(pMadreAnimal != null){
-            if(unSistema.buscarfamiliar(animal.madre.IdAnimal) != null) {
+        if (pMadreAnimal != null) {
+            if (unSistema.buscarfamiliar(animal.madre.IdAnimal) != null) {
                 pAbuelaMaterna = unSistema.buscarfamiliar(animal.madre.IdAnimal).madre.GetIdAnimal();
                 pAbueloMaterno = unSistema.buscarfamiliar(animal.madre.IdAnimal).padre.GetIdAnimal();
-            }
-            else {
+            } else {
                 pAbuelaMaterna = null;
                 pAbueloMaterno = null;
             }
         }
-        if(pPadreAnimal != null) {
-            if(unSistema.buscarfamiliar(animal.padre.IdAnimal) != null)
-            {
+        if (pPadreAnimal != null) {
+            if (unSistema.buscarfamiliar(animal.padre.IdAnimal) != null) {
                 pAbuelaPaterna = unSistema.buscarfamiliar(animal.padre.IdAnimal).madre.GetIdAnimal();
                 pAbueloPaterno = unSistema.buscarfamiliar(animal.padre.IdAnimal).padre.GetIdAnimal();
-            }
-            else
-            {
+            } else {
                 pAbuelaPaterna = null;
                 pAbueloPaterno = null;
             }
@@ -122,13 +104,13 @@ public class ABB {
         if (this.raiz != null) {
             String res = "Animal:\n" + unSistema.devolverAnimal(this.raiz.IdAnimal, 0);
             if (this.raiz.madre.IdAnimal != null) {
-                unSistema.devolverAnimal(this.raiz.madre.IdAnimal,  0);
-                res += "Madre:\n" + unSistema.devolverAnimal(this.raiz.madre.IdAnimal,  0);
+                unSistema.devolverAnimal(this.raiz.madre.IdAnimal, 0);
+                res += "Madre:\n" + unSistema.devolverAnimal(this.raiz.madre.IdAnimal, 0);
                 if (this.raiz.madre.madre.IdAnimal != null) {
-                    res += "Abuela materna:\n" +  unSistema.devolverAnimal(this.raiz.madre.madre.IdAnimal,  0);
+                    res += "Abuela materna:\n" + unSistema.devolverAnimal(this.raiz.madre.madre.IdAnimal, 0);
                 }
                 if (this.raiz.madre.padre.IdAnimal != null) {
-                    res += "Abuelo materno:\n" +  unSistema.devolverAnimal(this.raiz.madre.padre.IdAnimal,  0);
+                    res += "Abuelo materno:\n" + unSistema.devolverAnimal(this.raiz.madre.padre.IdAnimal, 0);
                 }
             }
             if (this.raiz.madre.IdAnimal == null) {
@@ -136,13 +118,13 @@ public class ABB {
             }
 
             if (this.raiz.padre.IdAnimal != null) {
-                res += "Padre:\n" + unSistema.devolverAnimal(this.raiz.padre.IdAnimal,  0);
+                res += "Padre:\n" + unSistema.devolverAnimal(this.raiz.padre.IdAnimal, 0);
 
-                 if (this.raiz.padre.madre.IdAnimal != null) {
-                res += "Abuela paterna:\n" +  unSistema.devolverAnimal(this.raiz.padre.madre.IdAnimal,  0);
-                 }
+                if (this.raiz.padre.madre.IdAnimal != null) {
+                    res += "Abuela paterna:\n" + unSistema.devolverAnimal(this.raiz.padre.madre.IdAnimal, 0);
+                }
                 if (this.raiz.padre.padre.IdAnimal != null) {
-                res += "Abuelo paterno:\n" + unSistema.devolverAnimal(this.raiz.padre.padre.IdAnimal,  0);
+                    res += "Abuelo paterno:\n" + unSistema.devolverAnimal(this.raiz.padre.padre.IdAnimal, 0);
                 }
             }
             if (this.raiz.padre.IdAnimal == null) {
@@ -150,11 +132,11 @@ public class ABB {
             }
             return res;
         }
-        return "no hay arbol";
+        return null;
     }
 
-    public ABB(){
-    raiz = null;
+    public ABB() {
+        raiz = null;
     }
 
 }

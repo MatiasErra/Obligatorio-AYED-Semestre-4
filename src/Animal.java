@@ -4,7 +4,6 @@ public class Animal {
     private String sexo;
     private boolean desparasitado;
     private boolean vacunado;
-
     private String empresa;
 
     public String getId() {
@@ -54,7 +53,7 @@ public class Animal {
 
     @Override
     public String toString() {
-        return "Id: "+this.id+" Tipo: "+this.tipo+" Sexo: "+this.sexo+" \nEsta desparacitado: "+(this.desparasitado?"Si":"No")+" Esta vacunado: "+(this.vacunado?"Si":"No")+" Id empresa ganadera: "+this.empresa+"\n";
+        return "Id: "+this.id+". Tipo: "+this.tipo+". Sexo: "+this.sexo+". \nEsta desparacitado: "+(this.desparasitado?"Si":"No")+". Esta vacunado: "+(this.vacunado?"Si":"No")+". \nId empresa ganadera: "+this.empresa+"\n";
     }
 
     public Animal(String id, String tipo, String sexo, boolean desparasitado, boolean vacunado,  String empresa) {
