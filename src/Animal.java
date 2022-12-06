@@ -4,8 +4,7 @@ public class Animal {
     private String sexo;
     private boolean desparasitado;
     private boolean vacunado;
-    private String idMadre;
-    private String idPadre;
+
     private String empresa;
 
     public String getId() {
@@ -48,21 +47,6 @@ public class Animal {
         this.vacunado = vacunado;
     }
 
-    public String getIdMadre() {
-        return idMadre;
-    }
-
-    public void setIdMadre(String idMadre) {
-        this.idMadre = idMadre;
-    }
-
-    public String getIdPadre() {
-        return idPadre;
-    }
-
-    public void setIdPadre(String idPadre) {
-        this.idPadre = idPadre;
-    }
 
     public String getEmpresa() { return empresa; }
 
@@ -73,14 +57,13 @@ public class Animal {
         return "Id: "+this.id+" Tipo: "+this.tipo+" Sexo: "+this.sexo+" \nEsta desparacitado: "+(this.desparasitado?"Si":"No")+" Esta vacunado: "+(this.vacunado?"Si":"No")+" Id empresa ganadera: "+this.empresa+"\n";
     }
 
-    public Animal(String id, String tipo, String sexo, boolean desparasitado, boolean vacunado, String idMadre, String idPadre, String empresa) {
+    public Animal(String id, String tipo, String sexo, boolean desparasitado, boolean vacunado,  String empresa) {
         this.id = id;
         this.tipo = tipo;
         this.sexo = sexo;
         this.desparasitado = desparasitado;
         this.vacunado = vacunado;
-        this.idMadre = idMadre;
-        this.idPadre = idPadre;
+
         this.empresa = empresa;
     }
 
