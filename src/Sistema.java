@@ -406,7 +406,7 @@ public class Sistema {
     }
 
     public static void listarPorEspecie(String idEmpresa) {
-        System.out.println("Seleccione la especie a listar, ovino o bobino");
+        System.out.println("Seleccione la especie a listar, ovino o bovino");
         String tipo = scan.next().toLowerCase().charAt(0) == 'o' ? "Ovino" : "Bovino";
 
         int cont = 1;
